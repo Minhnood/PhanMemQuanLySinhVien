@@ -1,28 +1,17 @@
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {
-  BrowserRouter,
-  Route,
-  Routes
-} from 'react-router-dom';
-
 
 import NavHead from './components/NavHead';
 import Listpage from './components/Listpage';
 
-
 function App() {
-
- 
-
-
   return (
-    <BrowserRouter>
-      <NavHead></NavHead>
+    <HashRouter>
+      <NavHead />
       <Routes>
-       <Route path="minhnood.github.io/PhanMemQuanLySinhVien/" element={<Listpage />} />
+        <Route path="/" element={<Listpage />} />
       </Routes>
-    </BrowserRouter>
-
+    </HashRouter>
   );
 }
 
