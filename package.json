@@ -2,7 +2,7 @@
   "name": "blog_router",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://minhhood.github.io/PhanMemQuanLySinhVien",
+  "homepage": "https://minhnood.github.io/PhanMemQuanLySinhVien",
   "dependencies": {
     "@ckeditor/ckeditor5-react": "^9.5.0",
     "@reduxjs/toolkit": "^2.5.0",
