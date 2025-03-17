@@ -19,7 +19,7 @@ function App() {
     <BrowserRouter>
       <NavHead></NavHead>
       <Routes>
-       <Route path="/PhanMemQuanLySinhVien/" element={<Listpage />} />
+       <Route path="minhnood.github.io/PhanMemQuanLySinhVien/" element={<Listpage />} />
       </Routes>
     </BrowserRouter>
 
