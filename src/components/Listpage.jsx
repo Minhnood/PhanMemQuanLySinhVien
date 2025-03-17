@@ -16,7 +16,6 @@ function Listpage() {
 
     return (
         <Container fluid className="p-4">
-
             <Row className="justify-content-center">
                 {/* Form Nhập Dữ Liệu */}
                <AddStudent/>
