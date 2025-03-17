@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/PhanMemQuanLySinhVien/static/css/main.cf8cb218.css",
+    "main.js": "/PhanMemQuanLySinhVien/static/js/main.667bc2c4.js",
+    "index.html": "/PhanMemQuanLySinhVien/index.html",
+    "main.cf8cb218.css.map": "/PhanMemQuanLySinhVien/static/css/main.cf8cb218.css.map",
+    "main.667bc2c4.js.map": "/PhanMemQuanLySinhVien/static/js/main.667bc2c4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cf8cb218.css",
+    "static/js/main.667bc2c4.js"
+  ]
+}
