@@ -19,7 +19,7 @@ function App() {
     <BrowserRouter>
       <NavHead></NavHead>
       <Routes>
-       <Route path="/" element={<Listpage />} />
+       <Route path="/PhanMemQuanLySinhVien/" element={<Listpage />} />
       </Routes>
     </BrowserRouter>
 
