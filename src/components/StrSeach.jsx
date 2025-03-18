@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Row, Col, Form, Button, Card } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { searchStudent } from "../store/reducer";
+import { actPayment, actYear, searchStudent } from "../store/reducer";
 
 function StrSeach() {
     const dispatch = useDispatch();
-    const [strSeach, setStrSeach] = useState("");
+    const [strSeach, setStrSeach] = useState(""); // Đảm bảo không bị null
+    const [yearTyper, setYearTyper] = useState(""); // Dùng chuỗi rỗng thay vì 0
+    const [paymentTyper, setPaymentTyper] = useState([]); // Mảng để chứa nhiều giá trị thanh toán
 
     function handleSeacrh(event) {
         setStrSeach(event.target.value);
@@ -17,13 +19,30 @@ function StrSeach() {
 
     function handleClearSearch() {
         setStrSeach("");
-        dispatch(searchStudent("")); // Xóa tìm kiếm, hiển thị lại danh sách đầy đủ
+        dispatch(searchStudent(""));
     }
+
+    function changeYear(e) {
+        setYearTyper(e.target.value || ""); // Đảm bảo không bị null
+    }
+
+    function changePayment(e) {
+        const value = e.target.value;
+        setPaymentTyper(prev => 
+            e.target.checked ? [...prev, value] : prev.filter(item => item !== value)
+        );
+    }
+
+    useEffect(() => {
+        dispatch(actYear(yearTyper));
+        dispatch(actPayment(paymentTyper));
+    }, [yearTyper, paymentTyper, dispatch]);
 
     return (
         <Col md={5}>
             <Card className="p-4 shadow">
                 <Form>
+                    {/* Ô tìm kiếm */}
                     <Form.Label><b>Mục tìm kiếm</b></Form.Label>
                     <Row>
                         <Col>
@@ -31,7 +50,7 @@ function StrSeach() {
                                 onChange={handleSeacrh}
                                 type="text"
                                 placeholder="Tìm kiếm tên..."
-                                value={strSeach} // Cập nhật giá trị input
+                                value={strSeach}
                                 className="mb-2"
                             />
                         </Col>
@@ -43,10 +62,17 @@ function StrSeach() {
                         </Col>
                     </Row>
 
+                    {/* Bộ lọc */}
                     <Form.Label><b>Mục lọc</b></Form.Label>
                     <Row>
                         <Col>
-                            <Form.Control type="text" placeholder="Số năm học..." className="mb-2" />
+                            <Form.Control 
+                                onChange={changeYear} 
+                                type="text" 
+                                placeholder="Số năm học..." 
+                                className="mb-2"
+                                value={yearTyper}
+                            />
                         </Col>
                         <Col>
                             <Form.Control type="text" placeholder="Năm sinh..." className="mb-2" />
@@ -58,15 +84,26 @@ function StrSeach() {
                         <Col xs="auto" className="align-self-center">-</Col>
                         <Col><Form.Control type="number" placeholder="Điểm" className="mb-2" /></Col>
                     </Row>
+
                     {/* Checkbox */}
                     <Row>
                         <Col>
-                            <Form.Check type="checkbox" label="Đã thanh toán" />
-                            <Form.Check type="checkbox" label="Chưa thanh toán" />
+                            <Form.Check 
+                                onChange={changePayment} 
+                                type="checkbox" 
+                                value="Đã Thanh Toán" 
+                                label="Đã thanh toán" 
+                            />
+                            <Form.Check 
+                                onChange={changePayment} 
+                                type="checkbox" 
+                                value="Chưa Thanh Toán" 
+                                label="Chưa thanh toán" 
+                            />
                         </Col>
                         <Col>
-                            <Form.Check type="checkbox" label="Đủ điều kiện thi" />
-                            <Form.Check type="checkbox" label="Chưa đủ điều kiện thi" />
+                            <Form.Check type="checkbox" value="Đủ" label="Đủ điều kiện thi" />
+                            <Form.Check type="checkbox" value="Không" label="Chưa đủ điều kiện thi" />
                         </Col>
                     </Row>
 

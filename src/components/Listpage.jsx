@@ -1,16 +1,33 @@
 import { Container, Row, Button, Table } from "react-bootstrap";
 import AddStudent from "./AddStudent";
 import StrSeach from "./StrSeach";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { actDelete } from "../store/reducer";
 
 function Listpage() {
+    const dispatch = useDispatch();
     const listStudent = useSelector((state) => state.list);
     const strSearch = useSelector((state) => state.strSearch);
+    const filterYear = useSelector((state) => state.filteryear);
+    const filterPayment = useSelector((state) => state.filterPayment);
+    console.log(filterPayment);
+    
     let filterStudernt = [...listStudent];
-    console.log(filterStudernt);
     
     if (strSearch) {
         filterStudernt = filterStudernt.filter(item => item.name.toLowerCase().includes(strSearch.toLowerCase()));
+    }
+    if (filterYear > 0) {
+        filterStudernt = filterStudernt.filter(item => item.year === parseInt(filterYear));
+    }
+    if (filterPayment.length > 0) {
+        filterStudernt = filterStudernt.filter(item => filterPayment.includes(item.payment));
+    }
+    
+
+    function handleDelete(event) {
+        const studentId = event.target.value;
+        dispatch(actDelete(studentId)); 
     }
 
 
@@ -68,7 +85,7 @@ function Listpage() {
                             </td>
                             <td>
                                 <div className="d-flex justify-content-center">
-                                    <Button variant="danger" size="sm">Xóa</Button>
+                                    <Button onClick={handleDelete} value={student.id}  variant="danger" size="sm">Xóa</Button>
                                 </div>
                             </td>
                         </tr>

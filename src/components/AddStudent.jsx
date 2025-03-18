@@ -20,9 +20,6 @@ function AddStudent() {
     const dispatch = useDispatch();
     const [NewStudent, setNewStudent] = useState(defaultStudent);
 
-    console.log(NewStudent);
-    
-
     function handleChange(event) {
         const { name, type, value, checked } = event.target;
 
@@ -34,7 +31,6 @@ function AddStudent() {
 
     function handleSmuit() {
         dispatch(saveFrom(NewStudent));
-        // setNewStudent(defaultStudent);
     }
 
     function handleClearForm() {

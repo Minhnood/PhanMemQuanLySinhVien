@@ -4,8 +4,8 @@ import students from "../mocks/Students";
 const initialState = {
     list: [...students],
     strSearch: '',
-    filterStatus: [],
-    filterCategory: []
+    filteryear: 0,
+    filterPayment: [],
 };
 
 const slice = createSlice({
@@ -19,10 +19,20 @@ const slice = createSlice({
             let item = action.payload;
             console.log(item);
             const newFaqs = [...state.list];
-            item.id = generateId(state.list.length); // Tạo ID đơn giản
-            newFaqs.push(item); // Cập nhật trực tiếp Redux Toolkit cho phép
+            item.id = generateId(state.list.length);
+            newFaqs.push(item);
             state.list = newFaqs;
-        }
+        },
+        actDelete(state, action) {
+            const newItems = state.list.filter((item) => item.id !== action.payload);
+            state.list = newItems;
+        },
+        actYear(state, action) {
+           state.filteryear = action.payload;
+        },
+        actPayment(state, action) {
+            state.filterPayment = action.payload;
+         },
     }
 });
 
@@ -32,5 +42,5 @@ function generateId(currentLength) {
 }
 
 const { reducer, actions } = slice;
-export const { searchStudent, saveFrom } = actions;
+export const { searchStudent, saveFrom, actDelete, actYear, actPayment } = actions;
 export default reducer;
