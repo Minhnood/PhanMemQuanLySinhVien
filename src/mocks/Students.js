@@ -1,7 +1,7 @@
 function generateId(length = 8) {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    for (let i = 0; i < length; i++) {
+    const characters = '0123456789';
+    let result = '010'; // Bắt đầu với "010"
+    for (let i = 0; i < length - 3; i++) { // Chỉ cần tạo 5 số còn lại
         result += characters.charAt(Math.floor(Math.random() * characters.length));
     }
     return result;

@@ -3,67 +3,61 @@ import AddStudent from "./AddStudent";
 import StrSeach from "./StrSeach";
 import { useDispatch, useSelector } from "react-redux";
 import { actDelete } from "../store/reducer";
+import { Link } from "react-router-dom";
 
 function Listpage() {
     const dispatch = useDispatch();
     const listStudent = useSelector((state) => state.list);
     const strSearch = useSelector((state) => state.strSearch);
     const filterYear = useSelector((state) => state.filteryear);
-    const filterBirthYear = useSelector((state) => state.filterBirthYear); 
+    const filterBirthYear = useSelector((state) => state.filterBirthYear);
     const filterPayment = useSelector((state) => state.filterPayment);
     const filterScore = useSelector((state) => state.filterScore);
     const filteractEligibility = useSelector((state) => state.filteractEligibility);
-    
-    console.log(filterPayment);
-    
+
     let filteredStudent = [...listStudent];
-    
-    // Lọc theo tên sinh viên
+
+    // Lọc theo các tiêu chí
     if (strSearch) {
-        filteredStudent = filteredStudent.filter(item => 
+        filteredStudent = filteredStudent.filter(item =>
             item.name.toLowerCase().includes(strSearch.toLowerCase())
         );
     }
 
-    // Lọc theo số năm học
     if (filterYear > 0) {
         filteredStudent = filteredStudent.filter(item => item.year === parseInt(filterYear));
     }
 
-    // Lọc theo năm sinh
     if (filterBirthYear) {
         filteredStudent = filteredStudent.filter(item => item.dob.includes(filterBirthYear));
     }
 
-    // Lọc theo trạng thái thanh toán
     if (filterPayment.length > 0) {
         filteredStudent = filteredStudent.filter(item => filterPayment.includes(item.payment));
     }
 
-    // Lọc theo điều kiện thi
     if (filteractEligibility.length > 0) {
         filteredStudent = filteredStudent.filter(item => filteractEligibility.includes(item.eligibility));
     }
-    
-    // Lọc theo khoảng điểm
+
     if (filterScore && filterScore.min !== 0 && filterScore.max !== 0) {
         filteredStudent = filteredStudent.filter(item => (
-          (item.score <= filterScore.max && item.score >= filterScore.min)
+            item.score >= filterScore.min && item.score <= filterScore.max
         ));
     }
-      
+
     function handleDelete(event) {
         const studentId = event.target.value;
-        dispatch(actDelete(studentId)); 
+        dispatch(actDelete(studentId));
     }
 
     return (
         <Container fluid className="p-4">
             <Row className="justify-content-center">
                 {/* Form Nhập Dữ Liệu */}
-               <AddStudent/>
+                <AddStudent />
                 {/* Form Tìm Kiếm */}
-               <StrSeach/>
+                <StrSeach />
             </Row>
             <Table striped bordered hover className="mt-4 shadow-sm" style={{ borderRadius: "10px", overflow: "hidden" }}>
                 <thead>
@@ -79,6 +73,7 @@ function Listpage() {
                         <th>STCTT</th>
                         <th>ĐKT</th>
                         <th>Chỉnh sửa</th>
+                        <th>Xem thêm</th>
                         <th>Xóa</th>
                     </tr>
                 </thead>
@@ -111,7 +106,14 @@ function Listpage() {
                             </td>
                             <td>
                                 <div className="d-flex justify-content-center">
-                                    <Button onClick={handleDelete} value={student.id}  variant="danger" size="sm">Xóa</Button>
+                                    <Link to={`/student/${student.id}`}>
+                                        <Button variant="primary" size="sm">Xem thêm</Button>
+                                    </Link>
+                                </div>
+                            </td>
+                            <td>
+                                <div className="d-flex justify-content-center">
+                                    <Button onClick={handleDelete} value={student.id} variant="danger" size="sm">Xóa</Button>
                                 </div>
                             </td>
                         </tr>

@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import NavHead from './components/NavHead';
 import Listpage from './components/Listpage';
+import StudentInfo from './components/StudentInfo';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <NavHead />
       <Routes>
         <Route path="/" element={<Listpage />} />
+        <Route path="/student/:id" element={<StudentInfo />} />
       </Routes>
     </BrowserRouter >
   );
