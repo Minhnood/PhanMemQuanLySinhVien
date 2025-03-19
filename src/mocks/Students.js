@@ -19,6 +19,7 @@ let students = [
         payment: "Đã Thanh Toán",
         fee: "6.000.000",
         eligibility: "Đủ",
+        studentGender: "nam"
     },
     {
         id: generateId(),
@@ -31,6 +32,7 @@ let students = [
         payment: "Chưa Thanh Toán",
         fee: "7.500.000",
         eligibility: "Không",
+        studentGender: "nữ"
     },
     {
         id: generateId(),
@@ -43,6 +45,7 @@ let students = [
         payment: "Đã Thanh Toán",
         fee: "5.500.000",
         eligibility: "Đủ",
+        studentGender: "nam"
     },
     {
         id: generateId(),
@@ -55,6 +58,7 @@ let students = [
         payment: "Chưa Thanh Toán",
         fee: "4.200.000",
         eligibility: "Không",
+        studentGender: "nam"
     },
     {
         id: generateId(),
@@ -67,6 +71,7 @@ let students = [
         payment: "Đã Thanh Toán",
         fee: "6.800.000",
         eligibility: "Đủ",
+        studentGender: "nữ"
     }
 ];
 

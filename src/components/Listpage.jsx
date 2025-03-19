@@ -9,27 +9,53 @@ function Listpage() {
     const listStudent = useSelector((state) => state.list);
     const strSearch = useSelector((state) => state.strSearch);
     const filterYear = useSelector((state) => state.filteryear);
+    const filterBirthYear = useSelector((state) => state.filterBirthYear); 
     const filterPayment = useSelector((state) => state.filterPayment);
+    const filterScore = useSelector((state) => state.filterScore);
+    const filteractEligibility = useSelector((state) => state.filteractEligibility);
+    
     console.log(filterPayment);
     
-    let filterStudernt = [...listStudent];
+    let filteredStudent = [...listStudent];
     
+    // Lọc theo tên sinh viên
     if (strSearch) {
-        filterStudernt = filterStudernt.filter(item => item.name.toLowerCase().includes(strSearch.toLowerCase()));
+        filteredStudent = filteredStudent.filter(item => 
+            item.name.toLowerCase().includes(strSearch.toLowerCase())
+        );
     }
+
+    // Lọc theo số năm học
     if (filterYear > 0) {
-        filterStudernt = filterStudernt.filter(item => item.year === parseInt(filterYear));
+        filteredStudent = filteredStudent.filter(item => item.year === parseInt(filterYear));
     }
+
+    // Lọc theo năm sinh
+    if (filterBirthYear) {
+        filteredStudent = filteredStudent.filter(item => item.dob.includes(filterBirthYear));
+    }
+
+    // Lọc theo trạng thái thanh toán
     if (filterPayment.length > 0) {
-        filterStudernt = filterStudernt.filter(item => filterPayment.includes(item.payment));
+        filteredStudent = filteredStudent.filter(item => filterPayment.includes(item.payment));
+    }
+
+    // Lọc theo điều kiện thi
+    if (filteractEligibility.length > 0) {
+        filteredStudent = filteredStudent.filter(item => filteractEligibility.includes(item.eligibility));
     }
     
-
+    // Lọc theo khoảng điểm
+    if (filterScore && filterScore.min !== 0 && filterScore.max !== 0) {
+        filteredStudent = filteredStudent.filter(item => (
+          (item.score <= filterScore.max && item.score >= filterScore.min)
+        ));
+    }
+      
     function handleDelete(event) {
         const studentId = event.target.value;
         dispatch(actDelete(studentId)); 
     }
-
 
     return (
         <Container fluid className="p-4">
@@ -57,7 +83,7 @@ function Listpage() {
                     </tr>
                 </thead>
                 <tbody>
-                    {filterStudernt.map((student, index) => (
+                    {filteredStudent.map((student, index) => (
                         <tr key={student.id}>
                             <td>{index + 1}</td>
                             <td><b>{student.name}</b></td>
@@ -93,7 +119,7 @@ function Listpage() {
                 </tbody>
             </Table>
         </Container>
-    )
+    );
 }
 
 export default Listpage;

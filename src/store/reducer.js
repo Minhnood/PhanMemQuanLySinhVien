@@ -5,7 +5,10 @@ const initialState = {
     list: [...students],
     strSearch: '',
     filteryear: 0,
+    filterBirthYear: "",
     filterPayment: [],
+    filterScore: {min: 0, max: 0},
+    filteractEligibility: []
 };
 
 const slice = createSlice({
@@ -17,7 +20,6 @@ const slice = createSlice({
         },
         saveFrom(state, action) {
             let item = action.payload;
-            console.log(item);
             const newFaqs = [...state.list];
             item.id = generateId(state.list.length);
             newFaqs.push(item);
@@ -33,14 +35,22 @@ const slice = createSlice({
         actPayment(state, action) {
             state.filterPayment = action.payload;
          },
+        actScore(state, action) {
+            state.filterScore = action.payload;
+         },
+        actEligibility(state, action) {
+            state.filteractEligibility = action.payload;
+         },
+        actBirthYear(state, action) {  
+            state.filterBirthYear = action.payload; 
+        },
     }
 });
 
-// Hàm tạo ID số nguyên dựa trên độ dài danh sách
 function generateId(currentLength) {
     return currentLength + 1;
 }
 
 const { reducer, actions } = slice;
-export const { searchStudent, saveFrom, actDelete, actYear, actPayment } = actions;
+export const { searchStudent, saveFrom, actDelete, actYear, actPayment, actScore, actEligibility, actBirthYear } = actions;
 export default reducer;
