@@ -3,7 +3,7 @@ import { FaUserCircle } from "react-icons/fa";
 
 function NavHead() {
     return (
-        <Navbar bg="primary" variant="dark" className="p-4  d-flex align-items-center justify-content-between mb-4 ">
+        <Navbar bg="primary" variant="dark" className="p-4  d-flex align-items-center justify-content-between">
             <div className="d-flex align-items-center">
                 <Image src="https://tuyensinh.hvct.edu.vn/wp-content/uploads/2022/12/logo-slogan.png" alt="Logo" height={50} className="me-3" />
             </div>

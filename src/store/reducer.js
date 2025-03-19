@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import students from "../mocks/Students";
 
-const initialState = {
+const STORAGE_KEY = "students_data";
+const storedData = localStorage.getItem(STORAGE_KEY);
+const initialState = storedData ? JSON.parse(storedData) : {
     list: [...students],
     strSearch: '',
     filteryear: 0,
@@ -12,48 +14,58 @@ const initialState = {
     itemSelected: null,
 };
 
+const saveToLocalStorage = (state) => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+};
+
 const slice = createSlice({
     name: "List",
     initialState,
     reducers: {
         searchStudent(state, action) {
             state.strSearch = action.payload;
+            saveToLocalStorage(state);
         },
         saveFrom(state, action) {
             let item = action.payload;
             const newFaqs = [...state.list];
             if (item.id) {
-                const idx = newFaqs.findIndex((elm) =>
-                    elm.id === item.id
-                );
+                const idx = newFaqs.findIndex((elm) => elm.id === item.id);
                 newFaqs[idx] = item;
             } else {
                 item.id = generateId();
                 newFaqs.push(item);
             }
             state.list = newFaqs;
+            saveToLocalStorage(state);
         },
         actDelete(state, action) {
-            const newItems = state.list.filter((item) => item.id !== action.payload);
-            state.list = newItems;
+            state.list = state.list.filter((item) => item.id !== action.payload);
+            saveToLocalStorage(state);
         },
         actYear(state, action) {
-           state.filteryear = action.payload;
+            state.filteryear = action.payload;
+            saveToLocalStorage(state);
         },
         actPayment(state, action) {
             state.filterPayment = action.payload;
-         },
+            saveToLocalStorage(state);
+        },
         actScore(state, action) {
             state.filterScore = action.payload;
-         },
+            saveToLocalStorage(state);
+        },
         actEligibility(state, action) {
             state.filteractEligibility = action.payload;
-         },
+            saveToLocalStorage(state);
+        },
         actBirthYear(state, action) {  
             state.filterBirthYear = action.payload; 
+            saveToLocalStorage(state);
         },
         actEdit(state, action) {  
             state.itemSelected = action.payload; 
+            saveToLocalStorage(state);
         },
     }
 });
