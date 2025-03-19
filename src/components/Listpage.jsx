@@ -2,7 +2,7 @@ import { Container, Row, Button, Table } from "react-bootstrap";
 import AddStudent from "./AddStudent";
 import StrSeach from "./StrSeach";
 import { useDispatch, useSelector } from "react-redux";
-import { actDelete } from "../store/reducer";
+import { actDelete, actEdit } from "../store/reducer";
 import { Link } from "react-router-dom";
 
 function Listpage() {
@@ -49,6 +49,10 @@ function Listpage() {
     function handleDelete(event) {
         const studentId = event.target.value;
         dispatch(actDelete(studentId));
+    }
+
+    function handleEdit(student) {
+        dispatch(actEdit(student));
     }
 
     return (
@@ -101,7 +105,7 @@ function Listpage() {
                             </td>
                             <td>
                                 <div className="d-flex justify-content-center">
-                                    <Button variant="success" size="sm" className="me-2">Edit</Button>
+                                    <Button onClick={() => handleEdit(student)} variant="success" size="sm" className="me-2">Edit</Button>
                                 </div>
                             </td>
                             <td>

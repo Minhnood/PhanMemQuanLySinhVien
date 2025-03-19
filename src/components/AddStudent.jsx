@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Row, Col, Form, Button, Card } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { saveFrom } from "../store/reducer";
 
 const defaultStudent = {
@@ -21,6 +21,13 @@ function AddStudent() {
     const dispatch = useDispatch();
     const [NewStudent, setNewStudent] = useState(defaultStudent);
     const [errors, setErrors] = useState({});
+    const itemSelected = useSelector((state) => state.itemSelected);
+
+    useEffect(() => {
+        if (itemSelected !== null) {
+            setNewStudent({...itemSelected})
+        }
+    }, [itemSelected])
 
     function handleChange(event) {
         const { name, type, value, checked } = event.target;
@@ -52,7 +59,7 @@ function AddStudent() {
 
     function handleClearForm() {
         setNewStudent(defaultStudent);
-        setErrors({}); // Xóa lỗi khi reset form
+        setErrors({});
     }
 
     return (

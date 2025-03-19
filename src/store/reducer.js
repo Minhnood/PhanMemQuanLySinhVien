@@ -8,7 +8,8 @@ const initialState = {
     filterBirthYear: "",
     filterPayment: [],
     filterScore: {min: 0, max: 0},
-    filteractEligibility: []
+    filteractEligibility: [],
+    itemSelected: null,
 };
 
 const slice = createSlice({
@@ -21,8 +22,15 @@ const slice = createSlice({
         saveFrom(state, action) {
             let item = action.payload;
             const newFaqs = [...state.list];
-            item.id = generateId();
-            newFaqs.push(item);
+            if (item.id) {
+                const idx = newFaqs.findIndex((elm) =>
+                    elm.id === item.id
+                );
+                newFaqs[idx] = item;
+            } else {
+                item.id = generateId();
+                newFaqs.push(item);
+            }
             state.list = newFaqs;
         },
         actDelete(state, action) {
@@ -44,6 +52,9 @@ const slice = createSlice({
         actBirthYear(state, action) {  
             state.filterBirthYear = action.payload; 
         },
+        actEdit(state, action) {  
+            state.itemSelected = action.payload; 
+        },
     }
 });
 
@@ -57,5 +68,5 @@ function generateId(length = 8) {
 }
 
 const { reducer, actions } = slice;
-export const { searchStudent, saveFrom, actDelete, actYear, actPayment, actScore, actEligibility, actBirthYear } = actions;
+export const { searchStudent, saveFrom, actDelete, actYear, actPayment, actScore, actEligibility, actBirthYear, actEdit } = actions;
 export default reducer;
