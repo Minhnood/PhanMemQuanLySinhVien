@@ -34,8 +34,7 @@ const LoginPage = () => {
         <Row className="justify-content-center">
           <Col md={6} className="text-white text-center d-flex flex-column justify-content-center">
             <img src="https://tuyensinh.hvct.edu.vn/wp-content/uploads/2022/12/logo-slogan.png" alt="Logo" width={340} className="mb-3 mx-auto" />
-            <h2>Login into your account</h2>
-            <p>Let us make the circle bigger!</p>
+            <h2>Đăng nhập vào tài khoản của bạn</h2>
           </Col>
           <Col md={6}>
             <Card className="p-4 rounded shadow-lg">
@@ -49,14 +48,14 @@ const LoginPage = () => {
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="formPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>Mật khẩu</Form.Label>
                     <Form.Control type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                   </Form.Group>
 
                   <div className="text-center">
-                    <Button variant="primary" type="submit" className="w-100">Login</Button>
+                    <Button variant="primary" type="submit" className="w-100">Đăng nhập</Button>
                   </div>
-                  <p className="mt-3 text-center">Don't have an account? <Link to={"/loginUp"}>Sign up</Link></p>
+                  <p className="mt-3 text-center">Bạn chưa có tài khoản?<Link to={"/loginUp"}>Đăng ký</Link></p>
                 </Form>
               </Card.Body>
             </Card>
