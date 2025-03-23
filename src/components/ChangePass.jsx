@@ -33,7 +33,7 @@ function ChangePass() {
           <Col md={6}>
             <Card className="p-4 rounded shadow-lg">
               <Card.Body>
-                <h3 className="text-center">Thay đổi mật khẩu</h3>
+                <h3 className="text-center">Thay đổi thông tin</h3>
                 <Form onSubmit={handleLogin}>
                   <Form.Group className="mb-3" controlId="formEmail">
                     <Form.Label>Email</Form.Label>

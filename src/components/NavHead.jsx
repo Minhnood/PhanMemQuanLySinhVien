@@ -33,7 +33,7 @@ function NavHead() {
                         📋 Danh sách học sinh
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => navigate("/changepass")}>
-                        🔒 Đổi mật khẩu
+                        🔒 Thay đổi thông tin
                     </Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={() => {
