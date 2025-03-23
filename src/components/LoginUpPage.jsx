@@ -21,7 +21,7 @@ function LoginUpPage() {
 
     users.push({ email, password });
     localStorage.setItem("users", JSON.stringify(users));
-    setSuccess("Sign up successful! Redirecting to login...");
+    setSuccess("Đăng ký thành công! Đang chuyển hướng đến đăng nhập...");
     setTimeout(() => navigate("/login"), 2000);
   };
 
