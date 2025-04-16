@@ -39,7 +39,7 @@ const LoginPage = () => {
           <Col md={6}>
             <Card className="p-4 rounded shadow-lg">
               <Card.Body>
-                <h3 className="text-center">Login</h3>
+                <h3 className="text-center">Đăng nhập</h3>
                 {error && <p className="text-danger text-center">{error}</p>}
                 <Form onSubmit={handleLogin}>
                   <Form.Group className="mb-3" controlId="formEmail">
